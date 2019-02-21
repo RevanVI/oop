@@ -89,7 +89,7 @@ ostream& operator<<(ostream& out , TPolynom& pol) {
     out << pol.a << "x^2 ";
     if (pol.b >= number(0))
         cout << "+ ";
-    cout << pol.b;
+    cout << pol.b << "x ";
     if (pol.c >= number(0))
         cout << "+ ";
     cout << pol.c;
