@@ -95,11 +95,11 @@ int TApplication::run()
             break;
         case 5:
             if (polyInited) {
-                cout << polynom;
+                cout << polynom << endl;
             }else cout << "Polynom is undefined" << endl;
             if (xValueInited) {
-                cout << "x=" << xValue;
-            }else cout << "x is undefined";
+                cout << "x = " << xValue << endl;
+            }else cout << "x is undefined" << endl;
             _getch();
             break;
         default:
