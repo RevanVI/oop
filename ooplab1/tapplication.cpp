@@ -1,6 +1,6 @@
 #include "tapplication.h"
 
-TApplication::TApplication(int argc, char *argv[]): QCoreApplication (argc, argv)
+TApplication::TApplication(int argc, char **argv): QCoreApplication (argc, argv)
 {
     polyInited = false;
     xValueInited = false;
@@ -27,21 +27,29 @@ void TApplication::initRoots() {
 
 
 void TApplication::initOrRedactCoefs() {
-    int val;
+    number val;
     cout << "Enter polynom coefficients." << endl;
     cout << "The coefficient of the 2nd degree (!= 0): ";
     cin >> val;
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     while (val == 0)
     {
         cout << "Error! Entered 0. Repeat input: ";
         cin >> val;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
     polynom.setCoefA(val);
     cout << "The coefficient of the 1st degree: ";
     cin >> val;
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     polynom.setCoefB(val);
     cout << "The coefficient of the free member: ";
     cin >> val;
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     polynom.setCoefC(val);
     polyInited = true;
 }
@@ -63,6 +71,8 @@ int TApplication::menu() {
     int choice;
     cout<< endl << "Input field: ";
     cin >> choice;
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     return 	choice;
 }
 
@@ -84,14 +94,15 @@ int TApplication::run()
             if (!polyInited) initOrRedactCoefs();
             initRoots();
             initShowRoots();
-            _getch();
             break;
         case 4:
-            if (!polyInited) initOrRedactCoefs();
-            if (!xValueInited) initXValue();
-            initSolution();
-            cout << "Value for x = " << xValue << ": " << polynom.get_solution();
-            _getch();
+            {
+                if (!polyInited) initOrRedactCoefs();
+                if (!xValueInited) initXValue();
+                initSolution();
+                number buf = polynom.get_solution();
+                cout << "Value for x = " << xValue << ": " << buf;
+            }
             break;
         case 5:
             if (polyInited) {
@@ -100,11 +111,11 @@ int TApplication::run()
             if (xValueInited) {
                 cout << "x = " << xValue << endl;
             }else cout << "x is undefined" << endl;
-            _getch();
             break;
         default:
             break;
         }
+        system("pause");
     }
     return 0;
 }

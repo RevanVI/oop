@@ -59,6 +59,7 @@ build*
 *.opensdf
 *.vcxproj
 *vcxproj.*
+*make.bat
 
 # MinGW generated files
 *.Debug
