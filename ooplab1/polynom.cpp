@@ -1,4 +1,5 @@
 #include "polynom.h"
+#include <cfenv>
 
 TPolynom::TPolynom(number av , number bv, number cv)
 {
@@ -52,18 +53,30 @@ number* TPolynom::get_roots()
 }
 
 number TPolynom::findSolution(number xValue) {
-    solution = a*pow(xValue, 2) + b*xValue + c;
+    solution = a*xValue*xValue + b*xValue + c;
     return solution;
 }
 
 void TPolynom::findRoots() {
-    number discr = pow(b, 2) - 4 * a * c;
-    if (discr < 0)
+    number val = sqrt(b*b - number(4) * a * c);
+    if (fetestexcept(FE_INVALID))
     {
         num_of_roots = 0;
         return;
     }
-    else if (discr <= number(0.000001) && discr >= number(0.000001))
+    else
+    {
+        num_of_roots = 2;
+        roots[0] = (-b + val) / (2 * a);
+        roots[1] = (-b - val) / (2 * a);
+    }
+    /*
+    if (discr < number(0))
+    {
+        num_of_roots = 0;
+        return;
+    }
+    else if (discr <= number(0.000001) && discr >= number(-0.000001))
     {
         num_of_roots = 1;
         roots[0] = (-b) / (2 * a);
@@ -74,7 +87,9 @@ void TPolynom::findRoots() {
         roots[0] = (-b + sqrt(discr)) / (2 * a);
         roots[1] = (-b - sqrt(discr)) / (2 * a);
     }
+    */
 }
+
 
 void TPolynom::showRoots()
 {
@@ -88,11 +103,11 @@ void TPolynom::showRoots()
 ostream& operator<<(ostream& out , TPolynom& pol) {
     out << pol.a << "x^2 ";
     if (pol.b >= number(0))
-        cout << "+ ";
-    cout << pol.b << "x ";
+        out << "+ ";
+    out << pol.b << "x ";
     if (pol.c >= number(0))
-        cout << "+ ";
-    cout << pol.c;
+        out << "+ ";
+    out << pol.c;
     return out;
 }
 
