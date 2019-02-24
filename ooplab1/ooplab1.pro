@@ -17,7 +17,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
     polynom.cpp \
-    tapplication.cpp
+    tapplication.cpp \
+    tcomplex.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -27,4 +28,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     number.h \
     tapplication.h \
-    polynom.h
+    polynom.h \
+    tcomplex.h

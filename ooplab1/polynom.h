@@ -30,6 +30,5 @@ public:
     //вывод корней
     void showRoots();
 
-
     friend ostream& operator<<(ostream&, TPolynom&);
 };
