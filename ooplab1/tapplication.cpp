@@ -27,7 +27,7 @@ void TApplication::initRoots() {
 
 
 void TApplication::initOrRedactCoefs() {
-    int val;
+    number val;
     cout << "Enter polynom coefficients." << endl;
     cout << "The coefficient of the 2nd degree (!= 0): ";
     cin >> val;
