@@ -6,13 +6,19 @@ double roundPrec(double val, int prec)
     return round(val * pow(10, prec)) / pow(10, prec);
 }
 
+bool isEqual(double left, double right)
+{
+    double err = 0.000001;
+    return (left <= (right + err) && left >= (right - err));
+}
+
 TPolynom::TPolynom(number av , number bv, number cv)
 {
     a = av;
     b = bv;
     c = cv;
     num_of_roots = 0;
-    solution = number(0);
+    number solution = number(0);
 }
 
 TPolynom::~TPolynom()
