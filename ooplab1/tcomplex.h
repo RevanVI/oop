@@ -28,6 +28,7 @@ public:
     friend bool operator>=(TComplex, TComplex);
     friend bool operator==(TComplex, double);
     friend TComplex roundPrec(TComplex val, int prec);
+    friend bool isEqual(TComplex left, double right);
 };
 
 #endif // TCOMPLEX_H

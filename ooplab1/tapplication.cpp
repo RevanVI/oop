@@ -25,7 +25,6 @@ void TApplication::initRoots() {
     polynom.findRoots();
 }
 
-
 void TApplication::initOrRedactCoefs() {
     number val;
     cout << "Enter polynom coefficients." << endl;
@@ -33,7 +32,7 @@ void TApplication::initOrRedactCoefs() {
     cin >> val;
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    while (val == 0)
+    while (isEqual(val, 0))
     {
         cout << "Error! Entered 0. Repeat input: ";
         cin >> val;
@@ -57,6 +56,7 @@ void TApplication::initOrRedactCoefs() {
 void TApplication::initShowRoots() {
     cout << "Root(-s): ";
     polynom.showRoots();
+    cout << endl;
 }
 
 int TApplication::menu() {

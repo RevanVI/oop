@@ -96,15 +96,15 @@ bool operator>=(TComplex left, TComplex right)
     return (left.a >= right.a);
 }
 
-bool operator==(TComplex left, double right)
-{
-    double err = 0.000001;
-    return ((left.a <= (right + err) && left.a >= (right - err)) && (left.b <= (err) && left.a >= (- err)));
-}
-
 TComplex roundPrec(TComplex val, int prec)
 {
     double a = round(val.a * pow(10, prec)) / pow(10, prec);
     double b = round(val.b * pow(10, prec)) / pow(10, prec);
     return TComplex(a, b);
+}
+
+bool isEqual(TComplex left, double right)
+{
+    double err = 0.000001;
+    return ((left.a <= (right + err) && left.a >= (right - err)) && (left.b <= (err) && left.a >= (- err)));
 }
