@@ -52,9 +52,11 @@ TComplex operator-(TComplex val)
 
 TComplex sqrt(TComplex val) //возвращает только один корень, второй можно получить умножением на -1
 {
+    if (val.b <= 0.000001 && val.b >= -0.000001 && val.a < 0)
+        return TComplex(0, sqrt(-val.a));
       double r = sqrt(val.a * val.a + val.b * val.b);
       double angle = atan(val.b / val.a);
-      if ((val.a < 0 && val.b < 0 && angle > 0) || (val.a < 0 && val.b > 0 && angle < 0))
+      if ((val.a < 0 && val.b < 0) || (val.a < 0 && val.b > 0))
           angle += 3.14;
       double a = sqrt(r) * cos(angle / 2); //phi / 2
       double b = sqrt(r) * sin(angle / 2);
