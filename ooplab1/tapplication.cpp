@@ -2,8 +2,6 @@
 
 TApplication::TApplication(int argc, char **argv): QCoreApplication (argc, argv)
 {
-    polyInited = false;
-    xValueInited = false;
 }
 
 TApplication::~TApplication()
@@ -16,9 +14,7 @@ void TApplication::initSolution(TPolynom* polynom) {
     cout << "Enter x:";
     number xValue;
     cin >> xValue;
-    cout << "Result: ";
-    number val = polynom->findSolution(xValue);
-    cout << val << endl;
+    polynom->findSolution(xValue);
 }
 
 void TApplication::initRoots(TPolynom* polynom) {
@@ -63,7 +59,7 @@ int TApplication::menu() {
     system("cls");
     cout << "Menu:" << endl;
     cout << "1. Enter/change polynom's coefficients" << endl;
-    cout << "2. Calculate polynom value for a given X" << endl;
+    cout << "2. Enter X value" << endl;
     cout << "3. Search polynom root " << endl;
     cout << "4. Print polynom and x value" << endl;
     cout << "0. Exit" << endl;
@@ -80,6 +76,7 @@ int TApplication::run()
     int ch = 0;
     TPolynom* polynom = new TPolynom;
     bool polyInited = false;
+    bool xInited = false;
     while (true)
     {
         ch = menu();
@@ -89,7 +86,13 @@ int TApplication::run()
             polyInited = initOrRedactCoefs(polynom);
             break;
         case 2:
-            initSolution(polynom);
+            if (polyInited)
+            {
+                initSolution(polynom);
+                xInited = true;
+            }
+            else
+                cout << "Polynom is undefined" << endl;
             break;
         case 3:
             if (!polyInited) initOrRedactCoefs(polynom);
@@ -98,8 +101,13 @@ int TApplication::run()
             break;
         case 4:
             if (polyInited) {
-                cout << polynom << endl;
-            }else cout << "Polynom is undefined" << endl;
+                cout << *polynom << endl;
+                if (xInited)
+                    cout << "Polynom value for given X: " << polynom->get_solution() << endl;
+                else
+                    cout << "X value is undefined" << endl;
+            }
+            else cout << "Polynom is undefined" << endl;
             break;
         default:
             break;

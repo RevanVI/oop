@@ -8,7 +8,7 @@ double roundPrec(double val, int prec)
 
 bool isEqual(double left, double right)
 {
-    double err = 0.000001;
+    double err = 0.0001;
     return (left <= (right + err) && left >= (right - err));
 }
 
@@ -18,7 +18,7 @@ TPolynom::TPolynom(number av , number bv, number cv)
     b = bv;
     c = cv;
     num_of_roots = 0;
-    number solution = number(0);
+    solution = number(0);
 }
 
 TPolynom::~TPolynom()

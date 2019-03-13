@@ -11,8 +11,6 @@ using namespace std;
 class TApplication: public QCoreApplication
 {
 private:
-	bool polyInited;
-	bool xValueInited;
 public:
     TApplication(int argc, char **argv);
     ~TApplication();

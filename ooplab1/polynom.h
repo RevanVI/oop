@@ -5,6 +5,9 @@
 
 using namespace std;
 
+double roundPrec(double val, int prec);
+bool isEqual(double left, double right);
+
 class TPolynom {
 private:
     number a;
