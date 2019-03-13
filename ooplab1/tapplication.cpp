@@ -9,10 +9,9 @@ TApplication::~TApplication()
 
 }
 
-void TApplication::initSolution(TPolynom* polynom) {
+void TApplication::initSolution(TPolynom* polynom, number& xValue) {
 
     cout << "Enter x:";
-    number xValue;
     cin >> xValue;
     polynom->findSolution(xValue);
 }
@@ -61,7 +60,8 @@ int TApplication::menu() {
     cout << "1. Enter/change polynom's coefficients" << endl;
     cout << "2. Enter X value" << endl;
     cout << "3. Search polynom root " << endl;
-    cout << "4. Print polynom and x value" << endl;
+    cout << "4. Print result" << endl;
+    cout << "5. Print polynom and x value" << endl;
     cout << "0. Exit" << endl;
     int choice;
     cout<< endl << "Input field: ";
@@ -77,6 +77,7 @@ int TApplication::run()
     TPolynom* polynom = new TPolynom;
     bool polyInited = false;
     bool xInited = false;
+    number xValue;
     while (true)
     {
         ch = menu();
@@ -88,7 +89,7 @@ int TApplication::run()
         case 2:
             if (polyInited)
             {
-                initSolution(polynom);
+                initSolution(polynom, xValue);
                 xInited = true;
             }
             else
@@ -101,9 +102,18 @@ int TApplication::run()
             break;
         case 4:
             if (polyInited) {
-                cout << *polynom << endl;
                 if (xInited)
                     cout << "Polynom value for given X: " << polynom->get_solution() << endl;
+                else
+                    cout << "X value is undefined" << endl;
+            }
+            else cout << "Polynom is undefined" << endl;
+            break;
+        case 5:
+            if (polyInited) {
+                cout << "Polynom: " << *polynom << endl;
+                if (xInited)
+                    cout << "X value: " <<  xValue << endl;
                 else
                     cout << "X value is undefined" << endl;
             }

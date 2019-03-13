@@ -4,7 +4,7 @@
 #include <math.h>
 #include <conio.h>
 #include "polynom.h"
-#include "tcomplex.h"
+#include "number.h"
 
 using namespace std;
 
@@ -18,7 +18,7 @@ public:
 	int run();
     bool initOrRedactCoefs(TPolynom*);
     void initShowRoots(TPolynom*);
-    void initSolution(TPolynom*);
+    void initSolution(TPolynom*, number&);
     void initRoots(TPolynom*);
 };
 
