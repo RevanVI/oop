@@ -1,5 +1,9 @@
 #pragma once
 #include <QCoreApplication>
+#include <QtNetwork/QAbstractSocket>
+#include <QtNetwork/QUdpSocket>
+#include <QtNetwork/QtNetwork>
+#include <QDateTime>
 #include <iostream>
 #include <math.h>
 #include <conio.h>
@@ -10,15 +14,16 @@ using namespace std;
 
 class TApplication: public QCoreApplication
 {
+    Q_OBJECT
 private:
+    QUdpSocket* socket;
 public:
     TApplication(int argc, char **argv);
     ~TApplication();
-	int menu();
-	int run();
-    bool initOrRedactCoefs(TPolynom*);
-    void initShowRoots(TPolynom*);
-    void initSolution(TPolynom*, number&);
-    void initRoots(TPolynom*);
+    bool calcRoots(TPolynom*);
+public slots:
+    void receive();
+    void connected();
+    void disconnected();
 };
 

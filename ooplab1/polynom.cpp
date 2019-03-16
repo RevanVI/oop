@@ -84,7 +84,6 @@ void TPolynom::findRoots() {
     }
 }
 
-
 void TPolynom::showRoots()
 {
     if (num_of_roots == 0)

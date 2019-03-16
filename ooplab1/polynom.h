@@ -28,9 +28,7 @@ public:
     number get_solution();
     number* get_roots();
     number findSolution(number);
-    //вычисление корней
     void findRoots();
-    //вывод корней
     void showRoots();
 
     friend ostream& operator<<(ostream&, TPolynom&);

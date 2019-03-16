@@ -30,3 +30,10 @@ HEADERS += \
     tapplication.h \
     polynom.h \
     tcomplex.h
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../Qt/5.11.3/msvc2015_64/lib/ -lQt5Network
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../Qt/5.11.3/msvc2015_64/lib/ -lQt5Networkd
+else:unix: LIBS += -L$$PWD/../../../Qt/5.11.3/msvc2015_64/lib/ -lQt5Network
+
+INCLUDEPATH += $$PWD/../../../Qt/5.11.3/msvc2015_64/include
+DEPENDPATH += $$PWD/../../../Qt/5.11.3/msvc2015_64/include
