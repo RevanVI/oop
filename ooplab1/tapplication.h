@@ -22,8 +22,9 @@ public:
     ~TApplication();
     bool calcRoots(TPolynom*);
 public slots:
-    void receive();
+    void received();
     void connected();
     void disconnected();
+    void onSocketError(QAbstractSocket::SocketError);
 };
 

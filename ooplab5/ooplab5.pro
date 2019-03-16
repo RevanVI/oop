@@ -42,8 +42,11 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-INCLUDEPATH += $$PWD/../../../Qt/5.11.3/msvc2015_64/include
-DEPENDPATH += $$PWD/../../../Qt/5.11.3/msvc2015_64/include
 
-win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../../../Qt/5.11.3/msvc2015_64/lib/Qt5Network.lib
-else:unix|win32-g++: PRE_TARGETDEPS += $$PWD/../../../Qt/5.11.3/msvc2015_64/lib/libQt5Network.a
+unix|win32: LIBS += -L$$PWD/../../../Qt/5.11.2/msvc2015/lib/ -lQt5Network
+
+INCLUDEPATH += $$PWD/../../../Qt/5.11.2/msvc2015/include
+DEPENDPATH += $$PWD/../../../Qt/5.11.2/msvc2015/include
+
+win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../../../Qt/5.11.2/msvc2015/lib/Qt5Network.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$PWD/../../../Qt/5.11.2/msvc2015/lib/libQt5Network.a

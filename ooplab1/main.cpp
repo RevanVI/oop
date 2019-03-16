@@ -3,5 +3,5 @@
 int main(int argc, char *argv[])
 {
     TApplication a(argc, argv);
-    return 0;
+    return a.exec();
 }
