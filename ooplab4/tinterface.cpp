@@ -9,6 +9,17 @@ Tinterface::Tinterface(QWidget *parent) :
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
+
+    QDoubleValidator* valid = new QDoubleValidator(this);
+    valid->setLocale(QLocale::English);
+    ui->aReEdit->setValidator(valid);
+    ui->bReEdit->setValidator(valid);
+    ui->cReEdit->setValidator(valid);
+    ui->xReEdit->setValidator(valid);
+    ui->aImEdit->setValidator(valid);
+    ui->bImEdit->setValidator(valid);
+    ui->cImEdit->setValidator(valid);
+    ui->xImEdit->setValidator(valid);
     connect(ui->solveButton, SIGNAL (released()), this, SLOT (handleSolveButton()));
 }
 
@@ -24,65 +35,46 @@ void Tinterface::handleSolveButton()
 
     xValue=TComplex(ui->xReEdit->text().toDouble(),ui->xImEdit->text().toDouble());
 
-    //kill me
-    QString resPoly="(";
-    resPoly+= QString::number(polynom->getA().getA());
-    if(polynom->getA().getB()>=0.0000000001)
+    QString resPoly="(" + QString::number(polynom->getA().getA());
+    if(polynom->getA().getB()>=0)
         resPoly+="+";
-    resPoly+= QString::number(polynom->getA().getB());
-    resPoly+="i)x^2 ";
-
-    //if (polynom->getB().getA() >= 0.0000001)
-        resPoly+="+ (";
+    resPoly+= QString::number(polynom->getA().getB()) + "i)x^2 + (";
     resPoly+= QString::number(polynom->getB().getA());
-    if(polynom->getB().getB()>=0.0000000001)
+    if(polynom->getB().getB()>=0)
         resPoly+="+";
-    resPoly+= QString::number(polynom->getB().getB());
-    resPoly+= "i)x ";
-
-    //if (polynom->getC().getA() >= 0.0000001)
-        resPoly+="+ (";
+    resPoly+= QString::number(polynom->getB().getB()) + "i)x + (";
     resPoly+= QString::number(polynom->getC().getA());
-    //if(polynom->getC().getB()>=0.0000000001)
+    if(polynom->getC().getB()>=0)
         resPoly+="+ ";
-    resPoly+=QString::number(polynom->getC().getB());
-    resPoly+= "i)";
+    resPoly+=QString::number(polynom->getC().getB()) + "i)";
     ui->polynomShowLabel->setText(resPoly);
 
     polynom->findRoots();
 
-    QString resFirstRoot="1. ";
-    number root;
-    root = polynom->get_roots()[0];
-    resFirstRoot += QString::number(root.getA());
-    if(root.getB()>=0.00000000000001)
+    number root = polynom->get_roots()[0];
+     QString resFirstRoot = "1. " + QString::number(root.getA());
+    if(root.getB()>=0)
         resFirstRoot += "+";
-    resFirstRoot += QString::number(root.getB());
-    resFirstRoot +="i";
+    resFirstRoot += QString::number(root.getB()) + "i";
     ui->firstRootLabel->setText(resFirstRoot);
 
-    QString resSecondRoot="2. ";
     root = polynom->get_roots()[1];
-    resSecondRoot += QString::number(root.getA());
-    if(root.getB()>=0.00000000000001)
+    QString resSecondRoot = "2. " +  QString::number(root.getA());
+    if(root.getB()>=0)
         resSecondRoot += "+";
-    resSecondRoot += QString::number(root.getB());
-    resSecondRoot +="i";
+    resSecondRoot += QString::number(root.getB()) + "i";
     ui->secondRootLabel->setText(resSecondRoot);
 
     polynom->findSolution(xValue);
 
     number solution=polynom->get_solution();
-    QString resSolution="";
-    resSolution+=QString::number(solution.getA());
-    if(solution.getB()>0.00000000001 || solution.getB()<-0.00000000001)
+    QString resSolution = QString::number(solution.getA());
+    if(!isEqual(solution.getB(), 0.0))
     {
-        if(solution.getB() > 0.000000000001)
+        if(solution.getB() >= 0)
             resSolution += "+";
-        resSolution += QString::number(solution.getB());
-        resSolution +="i";
+        resSolution += QString::number(solution.getB()) + "i";
     }
-
     ui->solutionLabel->setText(resSolution);
 }
 

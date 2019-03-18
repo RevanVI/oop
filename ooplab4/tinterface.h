@@ -2,6 +2,7 @@
 #define TINTERFACE_H
 
 #include <QWidget>
+#include <QDoubleValidator>
 #include "polynom.h"
 #include "QtDebug"
 

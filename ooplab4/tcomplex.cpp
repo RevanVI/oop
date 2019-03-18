@@ -53,7 +53,7 @@ TComplex operator-(TComplex val)
     return TComplex(-val.a, -val.b);
 }
 
-TComplex sqrt(TComplex val) //РІРѕР·РІСЂР°С‰Р°РµС‚ С‚РѕР»СЊРєРѕ РѕРґРёРЅ РєРѕСЂРµРЅСЊ, РІС‚РѕСЂРѕР№ РјРѕР¶РЅРѕ РїРѕР»СѓС‡РёС‚СЊ СѓРјРЅРѕР¶РµРЅРёРµРј РЅР° -1
+TComplex sqrt(TComplex val)
 {
     if (val.b <= 0.000001 && val.b >= -0.000001 && val.a < 0)
         return TComplex(0, sqrt(-val.a));
