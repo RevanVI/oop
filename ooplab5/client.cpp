@@ -11,10 +11,11 @@ client::client(QWidget *parent) :
     //if (socket->state() == socket->BoundState)
     //connect(socket, SIGNAL(readyRead()), this, SLOT(receive()));
 
-    QTimer* timer = new QTimer(this);
-    timer->setInterval(1000);
-    timer->start();
-    connect(timer, SIGNAL(timeout()), this, SLOT(send()));
+    connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(send()));
+    //QTimer* timer = new QTimer(this);
+    //timer->setInterval(1000);
+    //timer->start();
+    //connect(timer, SIGNAL(timeout()), this, SLOT(send()));
 }
 
 client::~client()
@@ -52,3 +53,4 @@ void client::send()
     int byres = socket->writeDatagram(data, QHostAddress("127.0.0.1"), 7755);
     ++roots[0];
 }
+

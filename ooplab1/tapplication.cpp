@@ -1,19 +1,11 @@
 #include "tapplication.h"
 
-TApplication::TApplication(int argc, char **argv): QCoreApplication (argc, argv)
+TApplication::TApplication(int argc, char **argv): QApplication (argc, argv)
 {
-    socket = new QUdpSocket();
-    bool state = socket->bind(QHostAddress::LocalHost, 7755);
-    //connect(socket, SIGNAL(connected()), this, SLOT(connected()));
-    //connect(socket, SIGNAL(disconnected()), this, SLOT(disconnected()));
-    //if (socket->state() == socket->BoundState)
-    //   connect(socket, SIGNAL(readyRead()), this, SLOT(received()));
+    socket = new QUdpSocket(this);
+    socket->bind(QHostAddress::LocalHost, 7755);
+    connect(socket, SIGNAL(readyRead()), this, SLOT(received()));
     connect(socket, SIGNAL(error(QAbstractSocket::SocketError)),this, SLOT(onSocketError(QAbstractSocket::SocketError)));
-    QTimer* timer = new QTimer(this);
-    timer->setInterval(500);
-    timer->start();
-    connect(timer, SIGNAL(timeout()), this, SLOT(received()));
-    //received();
 }
 
 TApplication::~TApplication()
@@ -23,7 +15,7 @@ TApplication::~TApplication()
 
 void TApplication::received()
 {
-    if (socket->hasPendingDatagrams())
+    while (socket->hasPendingDatagrams())
     {
         QByteArray* data = new QByteArray();
         QHostAddress addr;
@@ -31,15 +23,17 @@ void TApplication::received()
         data->resize(socket->pendingDatagramSize());
         socket->readDatagram(data->data(), data->size(), &addr, &port);
 
-        //QDateTime time = QDateTime::currentDateTime();
+        QTime time = QTime::currentTime();
         QDataStream str(data, QIODevice::ReadWrite);
         str.setVersion(QDataStream::Qt_5_3);
 
         number val1, val2;
         str >> val1 >> val2;
-        QString addrStr = addr.toString();
-        cout << "receive message " << val1 << port << endl;
+        //QString* addrStr = new QString(addr.toString());
+        cout << time.toString().toStdString() << ": receive message " << val1 << " " << " " << port << endl;
+        data->clear();
         delete data;
+        //delete addrStr;
     }
 }
 

@@ -1,5 +1,6 @@
 #pragma once
 #include <QCoreApplication>
+#include <QtWidgets/QApplication>
 #include <QtNetwork/QAbstractSocket>
 #include <QtNetwork/QUdpSocket>
 #include <QtNetwork/QtNetwork>
@@ -12,7 +13,7 @@
 
 using namespace std;
 
-class TApplication: public QCoreApplication
+class TApplication: public QApplication
 {
     Q_OBJECT
 private:
