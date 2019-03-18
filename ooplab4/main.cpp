@@ -1,11 +1,10 @@
-#include "client.h"
+#include "tinterface.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    client w;
+    Tinterface w;
     w.show();
-
     return a.exec();
 }

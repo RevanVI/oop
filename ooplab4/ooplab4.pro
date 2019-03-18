@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2019-03-16T09:19:35
+# Project created by QtCreator 2019-03-17T12:39:58
 #
 #-------------------------------------------------
 
@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = ooplab5
+TARGET = ooplab4
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -26,27 +26,20 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        client.cpp \
+        tinterface.cpp \
+    polynom.cpp \
     tcomplex.cpp
 
 HEADERS += \
-        client.h \
+        tinterface.h \
     number.h \
+    polynom.h \
     tcomplex.h
 
 FORMS += \
-        client.ui
+        tinterface.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
-
-unix|win32: LIBS += -L$$PWD/../../../Qt/5.11.2/msvc2015/lib/ -lQt5Network
-
-INCLUDEPATH += $$PWD/../../../Qt/5.11.2/msvc2015/include
-DEPENDPATH += $$PWD/../../../Qt/5.11.2/msvc2015/include
-
-win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../../../Qt/5.11.2/msvc2015/lib/Qt5Network.lib
-else:unix|win32-g++: PRE_TARGETDEPS += $$PWD/../../../Qt/5.11.2/msvc2015/lib/libQt5Network.a

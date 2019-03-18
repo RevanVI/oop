@@ -5,9 +5,6 @@
 
 using namespace std;
 
-double roundPrec(double val, int prec);
-bool isEqual(double left, double right);
-
 class TPolynom {
 private:
     number a;
@@ -19,7 +16,9 @@ private:
 public:
     TPolynom(number av = number(1), number bv = number(0), number cv = number(0));
     ~TPolynom();
-
+    number getA(){return a;}
+    number getB(){return b;}
+    number getC(){return c;}
     void setCoefA(number val);
     void setCoefB(number val);
     void setCoefC(number val);
@@ -28,8 +27,10 @@ public:
     number get_solution();
     number* get_roots();
     number findSolution(number);
+    //РІС‹С‡РёСЃР»РµРЅРёРµ РєРѕСЂРЅРµР№
     void findRoots();
+    //РІС‹РІРѕРґ РєРѕСЂРЅРµР№
     void showRoots();
-
+    //string showPolynom();
     friend ostream& operator<<(ostream&, TPolynom&);
 };

@@ -1,5 +1,4 @@
 #pragma once
 #include "tcomplex.h"
-typedef double number;
-
+typedef TComplex number;
 

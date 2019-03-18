@@ -12,6 +12,9 @@ TComplex::~TComplex()
 
 }
 
+double TComplex::getA(){return a;}
+double TComplex::getB(){return b;}
+
 TComplex operator+(TComplex left, TComplex right)
 {
     return TComplex(left.a + right.a, left.b + right.b);
@@ -50,7 +53,7 @@ TComplex operator-(TComplex val)
     return TComplex(-val.a, -val.b);
 }
 
-TComplex sqrt(TComplex val) //возвращает только один корень, второй можно получить умножением на -1
+TComplex sqrt(TComplex val) //РІРѕР·РІСЂР°С‰Р°РµС‚ С‚РѕР»СЊРєРѕ РѕРґРёРЅ РєРѕСЂРµРЅСЊ, РІС‚РѕСЂРѕР№ РјРѕР¶РЅРѕ РїРѕР»СѓС‡РёС‚СЊ СѓРјРЅРѕР¶РµРЅРёРµРј РЅР° -1
 {
     if (val.b <= 0.000001 && val.b >= -0.000001 && val.a < 0)
         return TComplex(0, sqrt(-val.a));
@@ -109,16 +112,4 @@ bool isEqual(TComplex left, double right)
 {
     double err = 0.000001;
     return ((left.a <= (right + err) && left.a >= (right - err)) && (left.b <= (err) && left.a >= (- err)));
-}
-
-QDataStream &operator<<(QDataStream &out, const TComplex& val)
-{
-    out << val.a << val.b;
-    return out;
-}
-
-QDataStream &operator>>(QDataStream &out, TComplex& val)
-{
-    out >> val.a >> val.b;
-    return out;
 }

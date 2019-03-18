@@ -8,7 +8,7 @@ double roundPrec(double val, int prec)
 
 bool isEqual(double left, double right)
 {
-    double err = 0.0001;
+    double err = 0.000001;
     return (left <= (right + err) && left >= (right - err));
 }
 
@@ -18,7 +18,7 @@ TPolynom::TPolynom(number av , number bv, number cv)
     b = bv;
     c = cv;
     num_of_roots = 0;
-    solution = number(0);
+    number solution = number(0);
 }
 
 TPolynom::~TPolynom()
@@ -84,6 +84,7 @@ void TPolynom::findRoots() {
     }
 }
 
+
 void TPolynom::showRoots()
 {
     if (num_of_roots == 0)
@@ -92,6 +93,34 @@ void TPolynom::showRoots()
         for (int i = 0; i < num_of_roots; ++i)
             cout << roots[i] << " ";
 }
+
+/*string TPolynom::showPolynom()
+{
+    //kill me
+    string res="(";
+    res+= a.getA();
+    if(a.getB()>=0.0000000001)
+        res+="+";
+    res+=a.getB();
+    res+=")x^2 ";
+
+    if (b.getA() >= 0.0000001)
+        res+="+ (";
+    res+= b.getA();
+    if(b.getB()>=0.0000000001)
+        res+="+";
+    res+=b.getB();
+    res+= ")x ";
+
+    if (c.getA() >= 0.0000001)
+        res+="+ (";
+    res+= c.getA();
+    if(c.getB()>=0.0000000001)
+        res+="+";
+    res+=c.getB();
+    res+= ")";
+    return res;
+}*/
 
 ostream& operator<<(ostream& out , TPolynom& pol) {
     out << pol.a << "x^2 ";
