@@ -12,6 +12,9 @@ TComplex::~TComplex()
 
 }
 
+double TComplex::getA(){return a;}
+double TComplex::getB(){return b;}
+
 TComplex operator+(TComplex left, TComplex right)
 {
     return TComplex(left.a + right.a, left.b + right.b);
@@ -50,7 +53,7 @@ TComplex operator-(TComplex val)
     return TComplex(-val.a, -val.b);
 }
 
-TComplex sqrt(TComplex val) //возвращает только один корень, второй можно получить умножением на -1
+TComplex sqrt(TComplex val)
 {
     if (val.b <= 0.000001 && val.b >= -0.000001 && val.a < 0)
         return TComplex(0, sqrt(-val.a));

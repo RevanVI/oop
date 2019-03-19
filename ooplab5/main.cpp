@@ -1,11 +1,8 @@
-#include "client.h"
 #include <QApplication>
+#include "tapplication.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    client w;
-    w.show();
-
+    TApplication a(argc, argv);
     return a.exec();
 }

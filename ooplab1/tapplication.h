@@ -18,14 +18,17 @@ class TApplication: public QApplication
     Q_OBJECT
 private:
     QUdpSocket* socket;
+    number val[4];
 public:
     TApplication(int argc, char **argv);
     ~TApplication();
-    bool calcRoots(TPolynom*);
 public slots:
-    void received();
-    void connected();
-    void disconnected();
+    void receive();
     void onSocketError(QAbstractSocket::SocketError);
+    void calculate();
+    void send();
+signals:
+    void dataReceived();
+    void calculated();
 };
 

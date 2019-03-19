@@ -1,11 +1,15 @@
 #include "tapplication.h"
 
+
 TApplication::TApplication(int argc, char **argv): QApplication (argc, argv)
 {
     socket = new QUdpSocket(this);
-    socket->bind(QHostAddress::LocalHost, 7755);
-    connect(socket, SIGNAL(readyRead()), this, SLOT(received()));
+    socket->bind(QHostAddress::LocalHost, 6374);
+    connect(socket, SIGNAL(readyRead()), this, SLOT(receive()));
     connect(socket, SIGNAL(error(QAbstractSocket::SocketError)),this, SLOT(onSocketError(QAbstractSocket::SocketError)));
+    connect(this, SIGNAL(dataReceived()), this, SLOT(calculate()));
+    connect(this, SIGNAL(calculated()), this, SLOT(send()));
+
 }
 
 TApplication::~TApplication()
@@ -13,7 +17,7 @@ TApplication::~TApplication()
     delete socket;
 }
 
-void TApplication::received()
+void TApplication::receive()
 {
     while (socket->hasPendingDatagrams())
     {
@@ -24,29 +28,40 @@ void TApplication::received()
         socket->readDatagram(data->data(), data->size(), &addr, &port);
 
         QTime time = QTime::currentTime();
-        QDataStream str(data, QIODevice::ReadWrite);
+        QDataStream str(data, QIODevice::ReadOnly);
         str.setVersion(QDataStream::Qt_5_3);
-
-        number val1, val2;
-        str >> val1 >> val2;
-        //QString* addrStr = new QString(addr.toString());
-        cout << time.toString().toStdString() << ": receive message " << val1 << " " << " " << port << endl;
+        for (int i = 0; i < 4; ++i)
+            str >> val[i];
+        cout << time.toString().toStdString() << ": receive message, port " << port << endl;
         data->clear();
         delete data;
-        //delete addrStr;
+        emit dataReceived();
     }
 }
 
-void TApplication::connected()
+void TApplication::calculate()
 {
-    QDateTime time = QDateTime::currentDateTime();
-    cout << time.toString().toStdString() << ": client connected" << endl;
+    TPolynom* polynom = new TPolynom(val[0], val[1], val[2]);
+    polynom->findRoots();
+    polynom->findSolution(val[3]);
+
+    val[0] = polynom->get_roots()[0];
+    val[1] = polynom->get_roots()[1];
+    val[2] = polynom->get_solution();
+
+    emit calculated();
 }
 
-void TApplication::disconnected()
+void TApplication::send()
 {
-    QDateTime time = QDateTime::currentDateTime();
-    cout << time.toString().toStdString() << ": client disconnected" << endl;
+    QByteArray data;
+    QDataStream str(&data, QIODevice::WriteOnly);
+    str.setVersion(QDataStream::Qt_5_3);
+    for (int i = 0; i < 3; ++i)
+        str << val[i];
+    QTime time = QTime::currentTime();
+    socket->writeDatagram(data, QHostAddress::LocalHost, 22022);
+    cout << time.toString().toStdString() << ": send message " << endl;
 }
 
 void TApplication::onSocketError(QAbstractSocket::SocketError err)
