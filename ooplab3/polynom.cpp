@@ -1,5 +1,5 @@
 #include "polynom.h"
-#include <cfenv>
+//#include <cfenv>
 
 double roundPrec(double val, int prec)
 {
@@ -12,64 +12,77 @@ bool isEqual(double left, double right)
     return (left <= (right + err) && left >= (right - err));
 }
 
-TPolynom::TPolynom(number av , number bv, number cv)
+/*template<class number>
+TPolynom<number>::TPolynom(number av , number bv, number cv)
 {
     a = av;
     b = bv;
     c = cv;
     num_of_roots = 0;
     number solution = number(0);
-}
+}*/
 
-TPolynom::~TPolynom()
+/*template<class number>
+TPolynom<number>::~TPolynom()
 {
 
-}
+}*/
 
-void TPolynom::setCoefA(number val)
+/*template<class number>
+void TPolynom<number>::setCoefA(number val)
 {
     a = val;
-}
+}*/
 
-void TPolynom::setCoefB(number val)
+/*template<class number>
+void TPolynom<number>::setCoefB(number val)
 {
     b = val;
-}
+}*/
 
-void TPolynom::setCoefC(number val)
+/*template<class number>
+void TPolynom<number>::setCoefC(number val)
 {
     c = val;
-}
+}*/
 
-void TPolynom::setCoefs(number av, number bv, number cv)
+/*template<class number>
+void TPolynom<number>::setCoefs(number av, number bv, number cv)
 {
     a = av;
     b = bv;
     a = cv;
-}
+}*/
 
-short TPolynom::get_num_of_roots()
+/*template<class number>
+short TPolynom<number>::get_num_of_roots()
 {
     return num_of_roots;
-}
+}*/
 
-number TPolynom::get_solution()
+/*template<class number>
+number TPolynom<number>::get_solution()
 {
     return solution;
-}
+}*/
 
-number* TPolynom::get_roots()
+/*template<class number>
+TComplex* TPolynom<number>::get_roots()
 {
     return roots;
-}
+}*/
 
-number TPolynom::findSolution(number xValue) {
+/*template<class number>
+number TPolynom<number>::findSolution(number xValue)
+{
     solution = a*xValue*xValue + b*xValue + c;
     return solution;
-}
+}*/
 
-void TPolynom::findRoots() {
-    number val = sqrt(b*b - 4 * a * c);
+/*template<class number>
+void TPolynom<number>::findRoots()
+{
+    TComplex val = sqrt(b*b - 4 * a * c);
     if (fetestexcept(FE_INVALID))
     {
         num_of_roots = 0;
@@ -82,47 +95,21 @@ void TPolynom::findRoots() {
         roots[1] = roundPrec((-b - val) / (2 * a), 2);
 
     }
-}
+}*/
 
-
-void TPolynom::showRoots()
+/*template<class number>
+void TPolynom<number>::showRoots()
 {
     if (num_of_roots == 0)
         cout << "No roots";
     else
         for (int i = 0; i < num_of_roots; ++i)
             cout << roots[i] << " ";
-}
-
-/*string TPolynom::showPolynom()
-{
-    //kill me
-    string res="(";
-    res+= a.getA();
-    if(a.getB()>=0.0000000001)
-        res+="+";
-    res+=a.getB();
-    res+=")x^2 ";
-
-    if (b.getA() >= 0.0000001)
-        res+="+ (";
-    res+= b.getA();
-    if(b.getB()>=0.0000000001)
-        res+="+";
-    res+=b.getB();
-    res+= ")x ";
-
-    if (c.getA() >= 0.0000001)
-        res+="+ (";
-    res+= c.getA();
-    if(c.getB()>=0.0000000001)
-        res+="+";
-    res+=c.getB();
-    res+= ")";
-    return res;
 }*/
 
-ostream& operator<<(ostream& out , TPolynom& pol) {
+/*template<class number>
+ostream& operator<<(ostream& out , TPolynom<number>& pol)
+{
     out << pol.a << "x^2 ";
     if (pol.b >= number(0))
         out << "+ ";
@@ -131,5 +118,5 @@ ostream& operator<<(ostream& out , TPolynom& pol) {
         out << "+ ";
     out << pol.c;
     return out;
-}
+}*/
 

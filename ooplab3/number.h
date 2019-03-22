@@ -1,4 +1,5 @@
 #pragma once
 #include "tcomplex.h"
-typedef TComplex number;
+//typedef TComplex number;
+
 

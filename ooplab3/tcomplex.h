@@ -11,8 +11,7 @@ private:
 public:
     TComplex(double av = 0, double bv = 0);
     ~TComplex();
-    double getA();
-    double getB();
+
     friend TComplex operator+(TComplex, TComplex);
     friend TComplex operator-(TComplex, TComplex);
     friend TComplex operator*(TComplex, TComplex);
