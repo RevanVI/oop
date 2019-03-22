@@ -11,21 +11,21 @@ TApplication::~TApplication()
 
 }
 
-void TApplication::initXValue() {
+void TApplication::initSolution(TPolynom* polynom) {
+
     cout << "Enter x:";
+    number xValue;
     cin >> xValue;
-    xValueInited = true;
+    cout << "Result: ";
+    number val = polynom->findSolution(xValue);
+    cout << val << endl;
 }
 
-void TApplication::initSolution() {
-    polynom.findSolution(xValue);
+void TApplication::initRoots(TPolynom* polynom) {
+    polynom->findRoots();
 }
 
-void TApplication::initRoots() {
-    polynom.findRoots();
-}
-
-void TApplication::initOrRedactCoefs() {
+bool TApplication::initOrRedactCoefs(TPolynom* polynom) {
     number val;
     cout << "Enter polynom coefficients." << endl;
     cout << "The coefficient of the 2nd degree (!= 0): ";
@@ -39,23 +39,23 @@ void TApplication::initOrRedactCoefs() {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
-    polynom.setCoefA(val);
+    polynom->setCoefA(val);
     cout << "The coefficient of the 1st degree: ";
     cin >> val;
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    polynom.setCoefB(val);
+    polynom->setCoefB(val);
     cout << "The coefficient of the free member: ";
     cin >> val;
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    polynom.setCoefC(val);
-    polyInited = true;
+    polynom->setCoefC(val);
+    return true;
 }
 
-void TApplication::initShowRoots() {
+void TApplication::initShowRoots(TPolynom* polynom) {
     cout << "Root(-s): ";
-    polynom.showRoots();
+    polynom->showRoots();
     cout << endl;
 }
 
@@ -63,10 +63,9 @@ int TApplication::menu() {
     system("cls");
     cout << "Menu:" << endl;
     cout << "1. Enter/change polynom's coefficients" << endl;
-    cout << "2. Enter value x" << endl;
+    cout << "2. Calculate polynom value for a given X" << endl;
     cout << "3. Search polynom root " << endl;
-    cout << "4. Calculate polynom value for a given X" << endl;
-    cout << "5. Print polynom and x value" << endl;
+    cout << "4. Print polynom and x value" << endl;
     cout << "0. Exit" << endl;
     int choice;
     cout<< endl << "Input field: ";
@@ -78,39 +77,29 @@ int TApplication::menu() {
 
 int TApplication::run()
 {
-    int ch;
+    int ch = 0;
+    TPolynom* polynom = new TPolynom;
+    bool polyInited = false;
     while (true)
     {
         ch = menu();
         if (ch == 0) break;
         switch (ch) {
         case 1:
-            initOrRedactCoefs();
+            polyInited = initOrRedactCoefs(polynom);
             break;
         case 2:
-            initXValue();
+            initSolution(polynom);
             break;
         case 3:
-            if (!polyInited) initOrRedactCoefs();
-            initRoots();
-            initShowRoots();
+            if (!polyInited) initOrRedactCoefs(polynom);
+            initRoots(polynom);
+            initShowRoots(polynom);
             break;
         case 4:
-            {
-                if (!polyInited) initOrRedactCoefs();
-                if (!xValueInited) initXValue();
-                initSolution();
-                number buf = polynom.get_solution();
-                cout << "Value for x = " << xValue << ": " << buf;
-            }
-            break;
-        case 5:
             if (polyInited) {
                 cout << polynom << endl;
             }else cout << "Polynom is undefined" << endl;
-            if (xValueInited) {
-                cout << "x = " << xValue << endl;
-            }else cout << "x is undefined" << endl;
             break;
         default:
             break;

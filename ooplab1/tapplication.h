@@ -4,14 +4,13 @@
 #include <math.h>
 #include <conio.h>
 #include "polynom.h"
+#include "tcomplex.h"
 
 using namespace std;
 
 class TApplication: public QCoreApplication
 {
 private:
-	TPolynom polynom;
-	number xValue;
 	bool polyInited;
 	bool xValueInited;
 public:
@@ -19,10 +18,9 @@ public:
     ~TApplication();
 	int menu();
 	int run();
-	void initXValue();
-	void initOrRedactCoefs();
-	void initShowRoots();
-	void initSolution();
-	void initRoots();
+    bool initOrRedactCoefs(TPolynom*);
+    void initShowRoots(TPolynom*);
+    void initSolution(TPolynom*);
+    void initRoots(TPolynom*);
 };
 
