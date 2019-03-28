@@ -1,0 +1,31 @@
+#-------------------------------------------------
+#
+# Project created by QtCreator 2015-10-07T09:49:16
+#
+#-------------------------------------------------
+
+QT       += core gui
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+TARGET = MoveGraphicsItem
+TEMPLATE = app
+
+
+SOURCES += main.cpp\
+        widget.cpp \
+    myscene.cpp \
+    moveitem.cpp \
+    player.cpp
+
+HEADERS  += widget.h \
+    myscene.h \
+    moveitem.h \
+    player.h
+
+FORMS    += widget.ui
+
+RESOURCES += \
+    res.qrc
+
+

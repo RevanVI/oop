@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>../labs/chessImages/chessBack.png</file>
+        <file>../labs/chessImages/konBlack.png</file>
+        <file>../labs/chessImages/konWhite.png</file>
+        <file>../labs/chessImages/ladyaBlackpng.png</file>
+        <file>../labs/chessImages/ladyaWhite.png</file>
+        <file>../labs/chessImages/slonBlack.png</file>
+        <file>../labs/chessImages/slonWhite.png</file>
+    </qresource>
+</RCC>
